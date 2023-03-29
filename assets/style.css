@@ -105,6 +105,19 @@
     padding: 55px;
   }
   
+.container {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-quiz {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+
   @media screen and (max-width: 1183px) {
     main {
       flex-direction: column;

@@ -1,32 +1,36 @@
 var startBtn = document.querySelector("#start");
 var mainEl = document.querySelector("#main");
 var timeEl = document.querySelector("#time");
-startBtn.addEventListener("click", function() {
-  var question = showMessage("What is the answer to the Ultimate Question of Life, the Universe, and Everything?");
-  if (question === "42") {
-    alert("Correct!");
+let timerId;
+let timeleft = 120;
+let scoreEl = document.querySelector("#score");
+startBtn.addEventListener("click", startMyQuiz);
+
+function startMyQuiz() {
+let codeQuiz = document.querySelector("#code-quiz");
+codeQuiz.style.display = "none";
+timerId = setInterval(countdown, 1000);
+scoreEl.textContent = "Time: " + timeleft;
+  
+}
+
+function countdown() {
+  if (timeleft <= 0) {
+    clearTimeout(timerId);
+    endQuiz();
   } else {
-    alert("Wrong!");
-  var question = showMessage("How much wood would a woodchuck chuck if a woodchuck could chuck wood?");
-  if (question === "a lot") {
-    alert("Correct!");
-  } else {
-    alert("Wrong!");
+    scoreEl.textContent = "Time: " + timeleft;
+    timeleft--;
   }
-  var question = showMessage("What is the airspeed velocity of an unladen swallow?");
-  if (question === "African or European?") {
-    alert("Correct!");
-  } else {
-    alert("Wrong!");
-  }
-  var question = showMessage("Who is the best student in the class?");
-  if (question === "I am") {
-    alert("Correct!");
-  } else {
-    alert("Wrong!");
-  }
-  }
-});
+}
+ 
+function endQuiz() {
+  scoreEl.textContent = "Time: " + timeleft;
+  let endQuiz = document.querySelector("#endQuiz");
+  endQuiz.style.display = "block";
+  mainEl.style.display = "none";
+}
+
 function question () {
   var question = timerInterval;
   var answer = 42;
