@@ -7,7 +7,6 @@ startBtn.addEventListener("click", function() {
     alert("Correct!");
   } else {
     alert("Wrong!");
-  }
   var question = showMessage("How much wood would a woodchuck chuck if a woodchuck could chuck wood?");
   if (question === "a lot") {
     alert("Correct!");
@@ -26,8 +25,7 @@ startBtn.addEventListener("click", function() {
   } else {
     alert("Wrong!");
   }
-  showAnswer();
-  
+  }
 });
 function question () {
   var question = timerInterval;
@@ -35,23 +33,6 @@ function question () {
   var message = "The answer to the question '" + question + "' is " + answer + ".";
   console.log(message);
 }
-console.log(message);
-var question = ('What is the answer to the Ultimate Question of Life, the Universe, and Everything?');
-var answer = 42;
-var message = "The answer to the question '" + question + "' is " + answer + ".";
-console.log(message);
-var question = ('how much wood would a woodchuck chuck if a woodchuck could chuck wood?');
-var answer = "a lot";
-var message = "The answer to the question '" + question + "' is " + answer + ".";
-console.log(message);
-var question = ('What is the airspeed velocity of an unladen swallow?');
-var answer = "African or European?";
-var message = "The answer to the question '" + question + "' is " + answer + ".";
-console.log(message);
-var question = ('Who is the best student in the class?');
-var answer = "I am";
-var message = "The answer to the question '" + question + "' is " + answer + ".";
-
 
 // Selects element by id
 function showMessage(message) {
@@ -83,5 +64,3 @@ function showAnswer() {
   mainEl.appendChild(imgEl);
 
 }
-
-setTime();
