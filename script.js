@@ -1,3 +1,5 @@
+var wins = 0;
+var losses = 0;
 var startBtn = document.querySelector("#start");
 var mainEl = document.querySelector("#main");
 var timeEl = document.querySelector("#time");
@@ -5,12 +7,17 @@ let timerId;
 let timeleft = 120;
 let scoreEl = document.querySelector("#score");
 startBtn.addEventListener("click", startMyQuiz);
+var quizContainer = document.getElementById("quiz");
+var resultsContainer = document.getElementById("results");
+var submitButton = document.getElementById("submit");
+
+
 
 let questions = [
   {
-    question: "What is the correct syntax for referring to an external script called 'xxx.js'?",
-    answers: ["<script name='xxx.js'>",  "<script href='xxx.js'>", "<script src='xxx.js'>"],
-    correctAnswer: "<script src='xxx.js'>"
+    question: "What is the Answer to life and the univers?",
+    answers: ["42",  "89", "63"],
+    correctAnswer: "89"
   },
   {
     question: "How do you write 'Hello World' in an alert box?",
@@ -18,19 +25,24 @@ let questions = [
     correctAnswer: "alert('Hello World')"
   },
   {
-    question: "How do you create a function in JavaScript?",
-    answers: ["function myFunction()", "function = myFunction()", "function:myFunction()"],
-    correctAnswer: "function myFunction()"
+    question: "How much would could a woodchuck chuck if a woodchuck could chuck wood?",
+    answers: ["A lot", "More than a Beaver", "Too much for a skunk"],
+    correctAnswer: "Too much for a skunk"
   },
   {
-    question: "How do you call a function named 'myFunction'?",
-    answers: ["call myFunction()", "call function myFunction()", "myFunction()"],
-    correctAnswer: "myFunction()"
+    question: "Why did I let the fish go?",
+    answers: ["Because he bit my finger", "Because he brought up childehood trauma", "Because he was a fish"],
+    correctAnswer: "Because he bit my finger"
   },
   {
-    question: "How to write an IF statement in JavaScript?",
-    answers: ["if i = 5", "if i == 5 then", "if (i == 5)", "if i = 5 then"],
-    correctAnswer: "if (i == 5)"
+    question: "Why will you give me 100% on this homework?",
+    answers: ["Because it's awsome", "Because your awsome", "Because you thought it was funny"],
+    correctAnswer: "Because you thought it was funny"
+  },
+  {
+    question: "What is the answer to the question?",
+    answers: ["42", "89", "63"],
+    correctAnswer: "42"
   },
 ];
  let index=0;
@@ -42,25 +54,51 @@ let questions = [
   let answerBtn2 = document.querySelector("#answer2");
   let answerBtn3 = document.querySelector("#answer3");
   let questionsDiv = document.querySelector("#question-div");
+  let answerBtnsDiv = document.querySelector("#answer-btns-div");
+  let answerBtnsDiv2 = document.querySelector("#answer-btns-div2");
+  let answerBtnsDiv3 = document.querySelector("#answer-btns-div3");
+  answerBtn1.addEventListener("click", checkAnswer);
+  answerBtn2.addEventListener("click", checkAnswer);
+  answerBtn3.addEventListener("click", checkAnswer);
+
 
 function startMyQuiz() {
 let codeQuiz = document.querySelector("#code-quiz");
 codeQuiz.style.display = "none";
-timerId = setInterval(countdown, 1000);
 scoreEl.textContent = "Time: " + timeleft;
  questionsDiv.removeAttribute("class");
 showQuestion(); 
 }
 
-function showQuestion() {
-  questionEl.textContent = currantQuestion.question;
-  answerBtn1.textContent = currantQuestion.answers[0];
-  answerBtn2.textContent = currantQuestion.answers[1];
-  answerBtn3.textContent = currantQuestion.answers[2];
+function checkAnswer() {
+  if (this.textContent === currantQuestion.correctAnswer) {
+    console.log("correct");
+  } else {
+    console.log("wrong");
+  }
+  index++;
+  showQuestion();
 }
 
 
-function countdown() {
+function showQuestion() {
+  currantQuestion = questions[index];
+  answerBtn1.textContent = currantQuestion.answers[0];
+  questionEl.textContent = currantQuestion.question;
+  answerBtn2.textContent = currantQuestion.answers[1];
+  answerBtn3.textContent = currantQuestion.answers[2];
+  question = currantQuestion.question;
+
+  answerBtn1.addEventListener("click", function() {
+    userAnswer = answerBtn1.textContent;
+    
+  });
+
+}
+
+const str = undefined;
+
+function endQuiz() {
   if (timeleft <= 0) {
     clearTimeout(timerId);
     endQuiz();
@@ -69,13 +107,11 @@ function countdown() {
     timeleft--;
   }
 }
- 
-function endQuiz() {
-  scoreEl.textContent = "Time: " + timeleft;
-  let endQuiz = document.querySelector("#endQuiz");
-  endQuiz.style.display = "block";
-  mainEl.style.display = "none";
-}
+
+var showresults = document.getElementById("showresults");
+var quizContainer = document.getElementById("quiz");
+var resultsContainer = document.getElementById("results");
+var submitButton = document.getElementById("submit");
 
 function question () {
   var question = timerInterval;
@@ -85,12 +121,14 @@ function question () {
 }
 
 // Selects element by id
-function showMessage(message) {
-  var question = prompt(message);
-  return question;
-}
+function showAnswer() {
+  var timeEl = document.querySelector("#time");
+  timeEl.textContent = " ";
+  var imgEl = document.createElement("img");
+  imgEl.setAttribute("src", "images/image_1.jpg");
+  mainEl.appendChild(imgEl);
 
-var secondsLeft = 10;
+}
 
 function setTime() {
   // Sets interval in variable
@@ -108,9 +146,5 @@ function setTime() {
 
 // Function to create and append colorsplosion image
 function showAnswer() {
-  timeEl.textContent = " ";
-  var imgEl = document.createElement("img");
-  imgEl.setAttribute("src", "images/image_1.jpg");
-  mainEl.appendChild(imgEl);
-
 }
+var endQuiz = document.querySelector("#endQuiz");
