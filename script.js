@@ -16,7 +16,7 @@ var submitButton = document.getElementById("submit");
 let questions = [
   {
     question: "What is the Answer to life and the univers?",
-    answers: ["42",  "89", "63"],
+    answers: ["42", "89", "63"],
     correctAnswer: "89"
   },
   {
@@ -45,30 +45,38 @@ let questions = [
     correctAnswer: "42"
   },
 ];
- let index=0;
- let currantQuestion = questions[index];
- let questionEl = document.querySelector("#question");
- let answersEl = document.querySelector("#answers");
-  let answerBtns = document.querySelectorAll(".answer-btn");
-  let answerBtn1 = document.querySelector("#answer1");
-  let answerBtn2 = document.querySelector("#answer2");
-  let answerBtn3 = document.querySelector("#answer3");
-  let questionsDiv = document.querySelector("#question-div");
-  let answerBtnsDiv = document.querySelector("#answer-btns-div");
-  let answerBtnsDiv2 = document.querySelector("#answer-btns-div2");
-  let answerBtnsDiv3 = document.querySelector("#answer-btns-div3");
-  answerBtn1.addEventListener("click", checkAnswer);
-  answerBtn2.addEventListener("click", checkAnswer);
-  answerBtn3.addEventListener("click", checkAnswer);
+let index = 0;
+let currantQuestion = questions[index];
+let questionEl = document.querySelector("#question");
+let answersEl = document.querySelector("#answers");
+let answerBtns = document.querySelectorAll(".answer-btn");
+let answerBtn1 = document.querySelector("#answer1");
+let answerBtn2 = document.querySelector("#answer2");
+let answerBtn3 = document.querySelector("#answer3");
+let questionsDiv = document.querySelector("#question-div");
+let answerBtnsDiv = document.querySelector("#answer-btns-div");
+let answerBtnsDiv2 = document.querySelector("#answer-btns-div2");
+let answerBtnsDiv3 = document.querySelector("#answer-btns-div3");
+answerBtn1.addEventListener("click", checkAnswer);
+answerBtn2.addEventListener("click", checkAnswer);
+answerBtn3.addEventListener("click", checkAnswer);
 
 
 function startMyQuiz() {
-let codeQuiz = document.querySelector("#code-quiz");
-codeQuiz.style.display = "none";
-scoreEl.textContent = "Time: " + timeleft;
- questionsDiv.removeAttribute("class");
-showQuestion(); 
+  let codeQuiz = document.querySelector("#code-quiz");
+  codeQuiz.style.display = "none";
+  scoreEl.textContent = "Time: " + timeleft;
+  questionsDiv.removeAttribute("class");
+  showQuestion();
 }
+
+function endQuiz() {
+  console.log("end quiz");
+alert ("end of quiz")
+
+}
+
+
 
 function checkAnswer() {
   if (this.textContent === currantQuestion.correctAnswer) {
@@ -77,11 +85,16 @@ function checkAnswer() {
     console.log("wrong");
   }
   index++;
-  showQuestion();
+  if (index < questions.length) {
+    showQuestion();
+  } else {
+    endQuiz;
+  }
 }
 
 
 function showQuestion() {
+  if  (index<questions.length) {
   currantQuestion = questions[index];
   answerBtn1.textContent = currantQuestion.answers[0];
   questionEl.textContent = currantQuestion.question;
@@ -89,31 +102,25 @@ function showQuestion() {
   answerBtn3.textContent = currantQuestion.answers[2];
   question = currantQuestion.question;
 
-  answerBtn1.addEventListener("click", function() {
+  answerBtn1.addEventListener("click", function () {
     userAnswer = answerBtn1.textContent;
-    
-  });
 
+  });
+  } else {
+    endQuiz();
+  }
 }
 
 const str = undefined;
 
-function endQuiz() {
-  if (timeleft <= 0) {
-    clearTimeout(timerId);
-    endQuiz();
-  } else {
-    scoreEl.textContent = "Time: " + timeleft;
-    timeleft--;
-  }
-}
+
 
 var showresults = document.getElementById("showresults");
 var quizContainer = document.getElementById("quiz");
 var resultsContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
 
-function question () {
+function question() {
   var question = timerInterval;
   var answer = 42;
   var message = "The answer to the question '" + question + "' is " + answer + ".";
@@ -132,10 +139,10 @@ function showAnswer() {
 
 function setTime() {
   // Sets interval in variable
-  var timerInterval = setInterval(function() {
+  var timerInterval = setInterval(function () {
     secondsLeft--;
 
-    if(secondsLeft === 0) {
+    if (secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
