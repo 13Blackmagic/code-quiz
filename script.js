@@ -1,16 +1,14 @@
-var wins = 0;
-var losses = 0;
 var startBtn = document.querySelector("#start");
 var mainEl = document.querySelector("#main");
 var timeEl = document.querySelector("#time");
-let timerId;
+let timerId; 
 let timeleft = 120;
 let scoreEl = document.querySelector("#score");
 startBtn.addEventListener("click", startMyQuiz);
 var quizContainer = document.getElementById("quiz");
 var resultsContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
-
+var endQuiz = document.querySelector("#endQuiz");
 
 
 let questions = [
@@ -71,12 +69,12 @@ function startMyQuiz() {
 }
 
 function endQuiz() {
-  console.log("end quiz");
-alert ("end of quiz")
-
+  let codeQuiz = document.querySelector("#code-quiz");
+  codeQuiz.style.display = "none";
+  endQuiz.style.display = "block";
+  showresults.style.display = "block";
+  clearInterval(timerId);
 }
-
-
 
 function checkAnswer() {
   if (this.textContent === currantQuestion.correctAnswer) {
@@ -92,6 +90,19 @@ function checkAnswer() {
   }
 }
 
+function move() {
+  var elem = document.getElementByID("timeleft");
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + "%";
+    }
+  }
+}
 
 function showQuestion() {
   if  (index<questions.length) {
@@ -129,7 +140,7 @@ function question() {
 
 // Selects element by id
 function showAnswer() {
-  var timeEl = document.querySelector("#time");
+  var timeEl = document.querySelector("timeleft");
   timeEl.textContent = " ";
   var imgEl = document.createElement("img");
   imgEl.setAttribute("src", "images/image_1.jpg");
@@ -137,21 +148,16 @@ function showAnswer() {
 
 }
 
-function setTime() {
-  // Sets interval in variable
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-
-    if (secondsLeft === 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
-      // Calls function to create and append image
-    }
-
-  }, 1000);
-}
-
 // Function to create and append colorsplosion image
 function showAnswer() {
+  var timeEl = document.querySelector("#time");
+  timeEl.textContent = " ";
+
 }
-var endQuiz = document.querySelector("#endQuiz");
+
+function showresults () {
+  var endQuiz = document.querySelector("#endQuiz");
+  endQuiz.style.display = "block";
+  var showresults = document.querySelector("#showresults");
+  showResults.style.display = "block";
+}

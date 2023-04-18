@@ -19,7 +19,7 @@
     margin-top: 20px;
   }
   
-  .win-loss-container {
+  .winloss-container {
     display: flex;
     justify-content: space-between;
     margin-top: 16px;
@@ -46,7 +46,7 @@
   header {
     padding: 40px;
     text-align: center;
-    background: #13293d;
+    background: #067ae7;
     color: #fff;
     border-bottom:30px #879274;
   }
@@ -97,7 +97,7 @@
   .timer {
     height: 240px;
     padding: 10px;
-    background: #13293d;
+    background: #0780f1;
     color: #fff;
     text-align: center;
   }
@@ -135,7 +135,7 @@
     }
   
     section {
-      background-color: white;
+      background-color: rgb(76, 12, 226);
       margin: 20px auto;
       width: 92vw;
     }
@@ -155,5 +155,4 @@
     .timer {
       height: 200px;
     }
-   
-  
+  }
