@@ -10,8 +10,6 @@
   <body>
     <div class="container">
       <h1 class="Welcome">Welcome to the Code Quiz</h1>
-    <h2 id="score">timeleft: 120</h5>
-      <h3 id="highscore">Highscore</h6>
     </div>
       <div id="code-quiz" class="code-quiz">
         <button class="btn btn-primary" id="start">Start Quiz</button>
@@ -23,20 +21,6 @@
             <button class="btn btn-primary" id="answer2"></button>
             <button class="btn btn-primary" id="answer3"></button>
           </div>
-              
-        <div id="end" class="hide">
-          <h2 id="end-message"></h2>
-          <form>
-            <input type="text" id="initials" placeholder="Enter Initials" />
-            <button class="btn btn-primary" id="submit">Submit</button>
-          </form>
-          
-          <div id="highscore" class="hide">
-            <h2>Highscore</h2>
-            <ul id="highscore-list"></ul>
-            <button class="btn btn-primary" id="go-back">Go Back</button>
-            <button class="btn btn-primary" id="clear">Clear Highscore</button>
-
             <div id="quizContainer">
               <div id="question"></div>
               <div id="answers"></div>
@@ -51,7 +35,38 @@
               <div id="showHighscore"></div>
               <div id="checkmyanswer"></div>
               <div id="timeleft"></div>
-                  
+
+              <div class="card timer">
+                <div class="timer-text">
+                  <div class="large-font timer-count">120</div>
+                  <h3>seconds remaining</h3>
+                </div>
+              </div>
+
+              <section>
+                <div class="card results" class="hide">
+                  <div class="results-text">
+                    <h2>All Done!</h2>
+                    <h3>Your final score is <span id="final-score"></span>.</h3>
+                    <p>Enter initials: <input type="text" id="initials" /></p>
+                    <button class="btn btn-primary" id="submit">Submit</button>
+                  </div>
+                </div>
+              <div id="submit" class="hide">
+                <h2 id="end-message"></h2>
+                <form>
+                  <input type="text" id="initials" placeholder="Enter Initials" />
+                  <button class="btn btn-primary" id="submit">Submit</button>
+                </form>
+                
+                <div id="highscore" class="showResult">
+                  <h2>Highscore</h2>
+                  <ul id="highscore-list"></ul>
+                  <button class="btn btn-primary" id="go-back">Go Back</button>
+                  <button class="btn btn-primary" id="clear">Clear Highscore</button>
+                </section>
+                </div>
+              </div>
         </div>
         <div class="card-footer">
         </div>

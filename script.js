@@ -1,16 +1,19 @@
 var startBtn = document.querySelector("#start");
 var mainEl = document.querySelector("#main");
-var timeEl = document.querySelector("#time");
-let timerId; 
-let timeleft = 120;
+var timerElement = document.querySelector(".timer-count"); 
+var timerCount = 20;
+var timerId;
+var timeleft = 20;
+var score = 0;
 let scoreEl = document.querySelector("#score");
-startBtn.addEventListener("click", startMyQuiz);
+startBtn.addEventListener("click", startMyQuiz)
 var quizContainer = document.getElementById("quiz");
 var resultsContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
 var endQuiz = document.querySelector("#endQuiz");
 
 
+// these are the questions and answers
 let questions = [
   {
     question: "What is the Answer to life and the univers?",
@@ -42,7 +45,12 @@ let questions = [
     answers: ["42", "89", "63"],
     correctAnswer: "42"
   },
+  {
+    endQuiz: "endQuiz",
+    showresults: "showresults"
+  }
 ];
+// this is the buttons for the answers
 let index = 0;
 let currantQuestion = questions[index];
 let questionEl = document.querySelector("#question");
@@ -55,19 +63,36 @@ let questionsDiv = document.querySelector("#question-div");
 let answerBtnsDiv = document.querySelector("#answer-btns-div");
 let answerBtnsDiv2 = document.querySelector("#answer-btns-div2");
 let answerBtnsDiv3 = document.querySelector("#answer-btns-div3");
+
 answerBtn1.addEventListener("click", checkAnswer);
 answerBtn2.addEventListener("click", checkAnswer);
 answerBtn3.addEventListener("click", checkAnswer);
+submitButton.addEventListener("click", showAnswer);
 
-
-function startMyQuiz() {
-  let codeQuiz = document.querySelector("#code-quiz");
-  codeQuiz.style.display = "none";
-  scoreEl.textContent = "Time: " + timeleft;
-  questionsDiv.removeAttribute("class");
-  showQuestion();
+function timerHandler() {
+  timerCount--;
+  timerElement.textContent = timerCount;
+  if (timerCount === 0) {
+    clearInterval(timerId);
+    endQuiz();
+  }
 }
 
+function startTimer() {
+  timerId = setInterval(timerHandler, 1000);
+}
+
+// this is how the quiz starts
+function startMyQuiz() {
+  let codeQuiz = document.querySelector("#code-quiz");
+  timerCount= 120;
+  codeQuiz.style.display = "none";
+  scoreEl.textContent = "Time: " + timeleft; // this is how we score the quiz
+  questionsDiv.removeAttribute("class");
+  startTimer ();
+  showQuestion();
+}
+// this is how the quiz ends and the score is shown
 function endQuiz() {
   let codeQuiz = document.querySelector("#code-quiz");
   codeQuiz.style.display = "none";
@@ -75,7 +100,7 @@ function endQuiz() {
   showresults.style.display = "block";
   clearInterval(timerId);
 }
-
+// this is how we check the answers
 function checkAnswer() {
   if (this.textContent === currantQuestion.correctAnswer) {
     console.log("correct");
@@ -89,30 +114,31 @@ function checkAnswer() {
     endQuiz;
   }
 }
-
-function move() {
-  var elem = document.getElementByID("timeleft");
-  var width = 1;
-  var id = setInterval(frame, 10);
-  function frame() {
-    if (width >= 100) {
-      clearInterval(id);
-    } else {
-      width++;
-      elem.style.width = width + "%";
-    }
-  }
-}
-
+ //this is the timer
+//function move() {
+  //var elem = document.getElementByID("timeleft");
+  //var width = 1;
+  //var id = timerElement(frame, 10);
+  //function frame() {
+    //if (width >= 100) {
+      //clearInterval(id);
+    //} else {
+      //width++;
+      //elem.style.width = width + "%";
+    //}
+  //}
+//}
+// this is how we show the questions
 function showQuestion() {
   if  (index<questions.length) {
   currantQuestion = questions[index];
   answerBtn1.textContent = currantQuestion.answers[0];
-  questionEl.textContent = currantQuestion.question;
+  questionEl.textContent = currantQuestion.question; 
   answerBtn2.textContent = currantQuestion.answers[1];
   answerBtn3.textContent = currantQuestion.answers[2];
   question = currantQuestion.question;
 
+// this is how we check the answers
   answerBtn1.addEventListener("click", function () {
     userAnswer = answerBtn1.textContent;
 
@@ -121,7 +147,6 @@ function showQuestion() {
     endQuiz();
   }
 }
-
 const str = undefined;
 
 
@@ -151,7 +176,7 @@ function showAnswer() {
 // Function to create and append colorsplosion image
 function showAnswer() {
   var timeEl = document.querySelector("#time");
-  timeEl.textContent = " ";
+  
 
 }
 
@@ -160,4 +185,41 @@ function showresults () {
   endQuiz.style.display = "block";
   var showresults = document.querySelector("#showresults");
   showResults.style.display = "block";
+}
+
+// function to show results
+function showResults() {
+  // gather answer containers from our quiz
+  var answerContainers = quizContainer.querySelectorAll(".answers");
+
+  // keep track of user's answers
+  var numCorrect = 0;
+
+  // for each question...
+  myQuestions.forEach((currentQuestion, questionNumber) => {
+    // find selected answer
+    var answerContainer = answerContainers[questionNumber];
+    var selector = `input[name=question${questionNumber}]:checked`;
+    var userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+    // if answer is correct
+    if (userAnswer === currentQuestion.correctAnswer) {
+      // add to the number of correct answers
+      numCorrect++;
+
+      // color the answers green
+      answerContainers[questionNumber].style.color = "lightgreen";
+    }
+    // if answer is wrong or blank
+    else {
+      // color the answers red
+      answerContainers[questionNumber].style.color = "red";
+    }
+  });
+
+  // show number of correct answers out of total
+  resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+}
+if (endQuiz) {
+  endQuiz.addEventListener("click", showResults);
 }
