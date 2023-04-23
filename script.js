@@ -45,10 +45,10 @@ let questions = [
     answers: ["42", "89", "63"],
     correctAnswer: "42"
   },
-  {
-    endQuiz: "endQuiz",
-    showresults: "showresults"
-  }
+  // //{
+  //   //endQuiz: "endQuiz",
+  //   showresults: "showresults"
+  // }
 ];
 // this is the buttons for the answers
 let index = 0;
