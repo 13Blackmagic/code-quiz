@@ -87,7 +87,7 @@ function startMyQuiz() {
   let codeQuiz = document.querySelector("#code-quiz");
   timerCount= 120;
   codeQuiz.style.display = "none";
-  scoreEl.textContent = "Time: " + timeleft; // this is how we score the quiz
+  timerElement.textContent = "Time: " + timeleft; // this is how we score the quiz
   questionsDiv.removeAttribute("class");
   startTimer ();
   showQuestion();
