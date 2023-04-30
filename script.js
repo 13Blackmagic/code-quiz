@@ -10,8 +10,9 @@ startBtn.addEventListener("click", startMyQuiz)
 var quizContainer = document.getElementById("quiz");
 var resultsContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
-var endQuiz = document.querySelector("#endQuiz");
-
+var endQuizDiv = document.querySelector("#endQuiz");
+var myQuestions = document.querySelector("#myQuestions");
+var currantQuestion = document.querySelector("#currantQuestion");
 
 // these are the questions and answers
 let questions = [
@@ -52,7 +53,8 @@ let questions = [
 ];
 // this is the buttons for the answers
 let index = 0;
-let currantQuestion = questions[index];
+let userAnswer = "";
+let showresults = document.querySelector("#showresults");
 let questionEl = document.querySelector("#question");
 let answersEl = document.querySelector("#answers");
 let answerBtns = document.querySelectorAll(".answer-btn");
@@ -72,7 +74,7 @@ submitButton.addEventListener("click", showAnswer);
 function timerHandler() {
   timerCount--;
   timerElement.textContent = timerCount;
-  if (timerCount === 0) {
+  if (timerCount <= 0) {
     clearInterval(timerId);
     endQuiz();
   }
@@ -94,9 +96,10 @@ function startMyQuiz() {
 }
 // this is how the quiz ends and the score is shown
 function endQuiz() {
-  let codeQuiz = document.querySelector("#code-quiz");
+  console.log ("endQuiz");
+  let codeQuiz = document.querySelector("#questions-div");
   codeQuiz.style.display = "none";
-  endQuiz.style.display = "block";
+  endQuizDiv.style.display = "block";
   showresults.style.display = "block";
   clearInterval(timerId);
 }
@@ -108,10 +111,11 @@ function checkAnswer() {
     console.log("wrong");
   }
   index++;
+  console.log("index: " + index + " questions.length: " + questions.length + "");
   if (index < questions.length) {
     showQuestion();
   } else {
-    endQuiz;
+    endQuiz();
   }
 }
  //this is the timer
@@ -143,15 +147,16 @@ function showQuestion() {
     userAnswer = answerBtn1.textContent;
 
   });
-  } else {
-    endQuiz();
-  }
-}
+
+
+
 const str = undefined;
 
 
-
-var showresults = document.getElementById("showresults");
+// funtion handleAnswerClick() {
+//   if (this.textContent === currantQuestion.correctAnswer) {
+//     console.log("correct");
+//   } else {
 var quizContainer = document.getElementById("quiz");
 var resultsContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
@@ -194,9 +199,9 @@ function showResults() {
 
   // keep track of user's answers
   var numCorrect = 0;
-
+}
   // for each question...
-  myQuestions.forEach((currentQuestion, questionNumber) => {
+    myQuestions.forEach((currentQuestion, questionNumber) => {
     // find selected answer
     var answerContainer = answerContainers[questionNumber];
     var selector = `input[name=question${questionNumber}]:checked`;
@@ -219,7 +224,7 @@ function showResults() {
 
   // show number of correct answers out of total
   resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
-}
-if (endQuiz) {
-  endQuiz.addEventListener("click", showResults);
-}
+// }
+// if (endQuiz) {
+//   endQuiz.addEventListener("click", showResults);
+  }}
