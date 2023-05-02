@@ -54,7 +54,7 @@ let questions = [
 // this is the buttons for the answers
 let index = 0;
 let userAnswer = "";
-let showresults = document.querySelector("#showresults");
+let showresultsEl = document.querySelector("#showresults");
 let questionEl = document.querySelector("#question");
 let answersEl = document.querySelector("#answers");
 let answerBtns = document.querySelectorAll(".answer-btn");
@@ -100,7 +100,7 @@ function endQuiz() {
   let codeQuiz = document.querySelector("#questions-div");
   codeQuiz.style.display = "none";
   endQuizDiv.style.display = "block";
-  showresults.style.display = "block";
+  showresultsEl.style.display = "block";
   clearInterval(timerId);
 }
 // this is how we check the answers
@@ -141,7 +141,7 @@ function showQuestion() {
   answerBtn2.textContent = currantQuestion.answers[1];
   answerBtn3.textContent = currantQuestion.answers[2];
   question = currantQuestion.question;
-
+  }
 // this is how we check the answers
   answerBtn1.addEventListener("click", function () {
     userAnswer = answerBtn1.textContent;
@@ -151,7 +151,7 @@ function showQuestion() {
 
 
 const str = undefined;
-
+}
 
 // funtion handleAnswerClick() {
 //   if (this.textContent === currantQuestion.correctAnswer) {
@@ -188,18 +188,18 @@ function showAnswer() {
 function showresults () {
   var endQuiz = document.querySelector("#endQuiz");
   endQuiz.style.display = "block";
-  var showresults = document.querySelector("#showresults");
-  showResults.style.display = "block";
+  var showend = document.querySelector("#showresults");
+  showend.style.display = "block";
 }
 
 // function to show results
-function showResults() {
+function showEnd() {
   // gather answer containers from our quiz
   var answerContainers = quizContainer.querySelectorAll(".answers");
 
   // keep track of user's answers
   var numCorrect = 0;
-}
+
   // for each question...
     myQuestions.forEach((currentQuestion, questionNumber) => {
     // find selected answer
@@ -213,12 +213,12 @@ function showResults() {
       numCorrect++;
 
       // color the answers green
-      answerContainers[questionNumber].style.color = "lightgreen";
+      answerContainer[questionNumber].style.color = "lightgreen";
     }
     // if answer is wrong or blank
     else {
       // color the answers red
-      answerContainers[questionNumber].style.color = "red";
+      answerContainer[questionNumber].style.color = "red";
     }
   });
 
@@ -227,4 +227,4 @@ function showResults() {
 // }
 // if (endQuiz) {
 //   endQuiz.addEventListener("click", showResults);
-  }}
+  }
