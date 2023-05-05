@@ -10,9 +10,16 @@ startBtn.addEventListener("click", startMyQuiz)
 var quizContainer = document.getElementById("quiz");
 var resultsContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
-var endQuizDiv = document.querySelector("#endQuiz");
+var endQuizContainer = document.querySelector("#endQuiz");
 var myQuestions = document.querySelector("#myQuestions");
 var currantQuestion = document.querySelector("#currantQuestion");
+
+
+var win = document.querySelector("#win");
+var lose = document.querySelector("#lose");
+var winCounter = 0;
+var loseCounter = 0;
+var isWin = false;
 
 // these are the questions and answers
 let questions = [
@@ -94,12 +101,23 @@ function startMyQuiz() {
   startTimer ();
   showQuestion();
 }
+
+// function winGame() {
+//   winCounter++;
+//   win.textContent = "Win: " + winCounter;
+// }
+
+// function loseGame() {
+//   loseCounter++;
+//   lose.textContent = "Lose: " + loseCounter;
+// }
+
 // this is how the quiz ends and the score is shown
 function endQuiz() {
   console.log ("endQuiz");
   let codeQuiz = document.querySelector("#questions-div");
   codeQuiz.style.display = "none";
-  endQuizDiv.style.display = "block";
+  endQuizContainer.style.display = "block";
   showresultsEl.style.display = "block";
   clearInterval(timerId);
 }
@@ -118,6 +136,15 @@ function checkAnswer() {
     endQuiz();
   }
 }
+// if (isWin && timerCount===0) {
+//   winGame();
+// } else {
+//   loseGame();
+// }
+// if (timerCount === 0) {
+//   loseGame();
+// }
+
  //this is the timer
 //function move() {
   //var elem = document.getElementByID("timeleft");
@@ -148,6 +175,15 @@ function showQuestion() {
 
   });
 
+// function setWins() {
+//   win.textContent = "Wins: " + winCounter;
+//   localStorage.setItems("winCounter", winCounter);
+// }
+
+// function setLosses() {
+//   lose.textContent = "Losses: " + loseCounter;
+//   localStorage.setItems("loseCounter", loseCounter);
+// }
 
 
 const str = undefined;
@@ -179,11 +215,11 @@ function showAnswer() {
 }
 
 // Function to create and append colorsplosion image
-function showAnswer() {
-  var timeEl = document.querySelector("#time");
+// function showAnswer() {
+//   var timeEl = document.querySelector("#time");
   
 
-}
+// }
 
 function showresults () {
   var endQuiz = document.querySelector("#endQuiz");
@@ -224,7 +260,8 @@ function showEnd() {
 
   // show number of correct answers out of total
   resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+
+  }
+
 // }
 // if (endQuiz) {
-//   endQuiz.addEventListener("click", showResults);
-  }
